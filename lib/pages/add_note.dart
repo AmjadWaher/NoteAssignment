@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:notes_app/controller/note.dart';
 import 'package:notes_app/models/note.dart';
+import 'package:notes_app/shared/data.dart';
 
 class AddNote extends StatefulWidget {
   const AddNote({super.key, this.note});

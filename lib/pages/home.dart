@@ -1,20 +1,36 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:notes_app/DB/note.dart';
 import 'package:notes_app/controller/home.dart';
 import 'package:notes_app/pages/add_note.dart';
 import 'package:notes_app/shared/data.dart';
 import 'package:notes_app/widgets/note_card.dart';
 
-class Home extends StatefulWidget {
-  const Home({super.key});
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
 
   @override
-  State<Home> createState() => _HomeState();
+  State<HomeScreen> createState() => _HomeState();
 }
 
-class _HomeState extends State<Home> {
+class _HomeState extends State<HomeScreen> {
   bool isSearch = false;
+
+  void _fetchNotes() async {
+    final fetchNotes = await NotesDatabase.instance.getAllNotes();
+    setState(() {
+      notes = fetchNotes;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    _fetchNotes();
+  }
+
   @override
   Widget build(BuildContext context) {
     final mq = MediaQuery.of(context).size;
@@ -63,6 +79,7 @@ class _HomeState extends State<Home> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+          log('init Notes length ${notes.length}');
           Navigator.of(context).push(
             MaterialPageRoute(
               builder: (context) => const AddNote(),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:notes_app/DB/note.dart';
 import 'package:notes_app/models/note.dart';
 import 'package:notes_app/shared/data.dart';
 
@@ -12,9 +13,11 @@ List<Note> searchInNotes(String value) {
   return list;
 }
 
-void removeNote(BuildContext context, Note note) {
+void removeNote(BuildContext context, Note note) async {
   final index = notes.indexOf(note);
   notes.removeAt(index);
+
+  await NotesDatabase.instance.deleteNote(note.id);
 
   ScaffoldMessenger.of(context).clearSnackBars();
   ScaffoldMessenger.of(context).showSnackBar(
@@ -43,6 +46,7 @@ SnackBar undoNoteRemoval(int index, Note note) {
               return;
             }
             notes.insert(index, note);
+            NotesDatabase.instance.insertNote(note);
             streamNoteController.sink.add(note);
           },
           child: Text(

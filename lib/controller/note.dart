@@ -1,36 +1,34 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
+import 'package:notes_app/DB/note.dart';
 import 'package:notes_app/models/note.dart';
 import 'package:notes_app/shared/data.dart';
+import 'package:uuid/uuid.dart';
 
-final titleController = TextEditingController();
-final contentController = TextEditingController();
-final random = Random();
-final color = Color.fromARGB(
-  255,
-  random.nextInt(256),
-  random.nextInt(256),
-  random.nextInt(256),
-);
-
-void saveNote() {
-  notes.add(
-    Note(
-      title: titleController.text,
-      content: contentController.text,
-      color: color,
-    ),
+void saveNote() async {
+  final note = Note(
+    id: getUuid(),
+    title: titleController.text,
+    content: contentController.text,
+    color: randomColor(),
   );
+  notes.add(note);
+
+  await NotesDatabase.instance.insertNote(note);
 
   streamNoteController.sink.add(notes);
   titleController.clear();
   contentController.clear();
 }
 
-void updateNote(Note note) {
+void updateNote(Note note) async {
   note.title = titleController.text;
   note.content = contentController.text;
+
+  await NotesDatabase.instance.updateNote(note);
+}
+
+String getUuid() {
+  return Uuid().v4();
 }
 
 SnackBar showSnackBar({

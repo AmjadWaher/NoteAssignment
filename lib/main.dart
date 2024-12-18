@@ -21,7 +21,7 @@ class App extends StatelessWidget {
         scaffoldBackgroundColor: Color.fromRGBO(37, 37, 37, 1),
         textTheme: GoogleFonts.nunitoTextTheme().copyWith(),
       ),
-      home: Home(),
+      home: HomeScreen(),
     );
   }
 }
