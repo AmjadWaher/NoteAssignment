@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:notes_app/DB/note.dart';
 import 'package:notes_app/controller/home.dart';
@@ -33,7 +31,6 @@ class _HomeState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final mq = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         title: isSearch
@@ -42,7 +39,7 @@ class _HomeState extends State<HomeScreen> {
                 style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.w600,
-                  fontSize: mq.width * 0.04,
+                  fontSize: 20,
                 ),
                 onChanged: (value) {
                   notesSearchList = searchInNotes(value);
@@ -55,7 +52,7 @@ class _HomeState extends State<HomeScreen> {
             : Text(
                 'Notes',
                 style: TextStyle(
-                  fontSize: mq.width * 0.1,
+                  fontSize: 35,
                   fontWeight: FontWeight.w600,
                 ),
               ),
@@ -69,17 +66,16 @@ class _HomeState extends State<HomeScreen> {
             style: IconButton.styleFrom(
               backgroundColor: Color.fromARGB(255, 59, 59, 59),
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(mq.width * 0.037),
+                borderRadius: BorderRadius.circular(12),
               ),
             ),
             icon: Icon(isSearch ? Icons.search_off : Icons.search),
           ),
-          SizedBox(width: mq.width * 0.03),
+          SizedBox(width: 10),
         ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          log('init Notes length ${notes.length}');
           Navigator.of(context).push(
             MaterialPageRoute(
               builder: (context) => const AddNote(),
@@ -99,9 +95,7 @@ class _HomeState extends State<HomeScreen> {
       ),
       body: notesSearchList.isNotEmpty || isSearch
           ? Padding(
-              padding: EdgeInsets.all(
-                mq.width * 0.045,
-              ),
+              padding: EdgeInsets.all(20),
               child: ListView.builder(
                 itemCount: notesSearchList.length,
                 itemBuilder: (context, index) {
@@ -129,9 +123,7 @@ class _HomeState extends State<HomeScreen> {
                         ],
                       )
                     : Padding(
-                        padding: EdgeInsets.all(
-                          mq.width * 0.045,
-                        ),
+                        padding: EdgeInsets.all(15),
                         child: ListView.builder(
                           itemCount: notes.length,
                           itemBuilder: (context, index) {
@@ -139,18 +131,16 @@ class _HomeState extends State<HomeScreen> {
                               key: Key(notes[index].id),
                               onDismissed: (direction) {
                                 removeNote(context, notes[index]);
-                                log('${notes.length}');
                               },
                               background: Padding(
-                                padding:
-                                    EdgeInsets.only(bottom: mq.width * 0.05),
+                                padding: EdgeInsets.only(bottom: 16),
                                 child: Container(
                                   color: Colors.red,
                                   child: Align(
                                     alignment: Alignment.center,
                                     child: Icon(
                                       Icons.delete,
-                                      size: mq.width * 0.1,
+                                      size: 35,
                                       color: Colors.white,
                                     ),
                                   ),

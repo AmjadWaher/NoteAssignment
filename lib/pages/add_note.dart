@@ -27,14 +27,12 @@ class _AddNoteState extends State<AddNote> {
 
   @override
   Widget build(BuildContext context) {
-    final mq = MediaQuery.of(context).size;
-
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        actionsPadding: EdgeInsets.only(right: mq.width * 0.037),
+        actionsPadding: EdgeInsets.only(right: 10),
         actions: [
-          SizedBox(width: mq.width * 0.025),
+          SizedBox(width: 10),
           IconButton(
             onPressed: () {
               if (titleController.text.isNotEmpty) {
@@ -46,7 +44,7 @@ class _AddNoteState extends State<AddNote> {
             style: IconButton.styleFrom(
               backgroundColor: Color.fromARGB(255, 59, 59, 59),
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(mq.width * 0.037),
+                borderRadius: BorderRadius.circular(12),
               ),
             ),
             icon: Icon(Icons.arrow_back),
@@ -78,7 +76,7 @@ class _AddNoteState extends State<AddNote> {
             style: IconButton.styleFrom(
               backgroundColor: Color.fromARGB(255, 59, 59, 59),
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(mq.width * 0.037),
+                borderRadius: BorderRadius.circular(12),
               ),
             ),
             icon: Icon(Icons.save),
@@ -86,7 +84,7 @@ class _AddNoteState extends State<AddNote> {
         ],
       ),
       body: Padding(
-        padding: EdgeInsets.all(mq.width * 0.03),
+        padding: EdgeInsets.all(12),
         child: ListView(
           children: [
             TextField(
@@ -94,14 +92,14 @@ class _AddNoteState extends State<AddNote> {
               cursorColor: Color.fromARGB(255, 255, 255, 255),
               style: TextStyle(
                 color: Color.fromARGB(255, 255, 255, 255),
-                fontSize: mq.width * 0.085,
+                fontSize: 45,
                 fontWeight: FontWeight.w400,
               ),
               decoration: InputDecoration(
                 hintText: 'Title',
                 hintStyle: TextStyle(
                   color: Color.fromARGB(255, 154, 154, 154),
-                  fontSize: mq.width * 0.12,
+                  fontSize: 45,
                   fontWeight: FontWeight.w400,
                 ),
                 border: InputBorder.none,
@@ -116,14 +114,14 @@ class _AddNoteState extends State<AddNote> {
               cursorColor: Color.fromARGB(255, 255, 255, 255),
               style: TextStyle(
                 color: Color.fromARGB(255, 255, 255, 255),
-                fontSize: mq.width * 0.058,
+                fontSize: 25,
                 fontWeight: FontWeight.w400,
               ),
               decoration: InputDecoration(
                 hintText: 'Type something...',
                 hintStyle: TextStyle(
                   color: Color.fromARGB(255, 154, 154, 154),
-                  fontSize: mq.width * 0.058,
+                  fontSize: 25,
                   fontWeight: FontWeight.w400,
                 ),
                 border: InputBorder.none,
